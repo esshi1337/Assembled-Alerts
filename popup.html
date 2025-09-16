@@ -1,13 +1,110 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Assembled Notifier</title>
+    <meta charset="utf-8">
+    <title>Assembled Schedule Notifier</title>
+    <link rel="stylesheet" href="popup.css">
 </head>
 <body>
-    <h1>Alert Settings</h1>
-    <label for="alertTime">Alert me before event starts (minutes):</label>
-    <input type="number" id="alertTime" value="5">
-    <button id="saveButton">Save</button>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>📅 Schedule Notifier</h1>
+            <div class="status-indicator">
+                <span id="statusDot" class="status-dot"></span>
+                <span id="statusText">Loading...</span>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="tabs">
+            <button class="tab-button active" data-tab="schedule">Schedule</button>
+            <button class="tab-button" data-tab="settings">Settings</button>
+            <button class="tab-button" data-tab="alarms">Alarms</button>
+        </div>
+
+        <!-- Schedule Tab -->
+        <div id="scheduleTab" class="tab-content active">
+            <div class="schedule-header">
+                <div class="schedule-info">
+                    <div id="scheduleDate" class="schedule-date">Today</div>
+                    <div id="scheduleTimezone" class="schedule-timezone">CST</div>
+                </div>
+                <button id="refreshButton" class="refresh-btn" title="Refresh Schedule">🔄</button>
+            </div>
+
+            <div id="scheduleContainer" class="schedule-container">
+                <div id="scheduleList" class="schedule-list">
+                    <!-- Schedule items will be populated here -->
+                </div>
+                
+                <div id="noSchedule" class="no-schedule" style="display: none;">
+                    <div class="no-schedule-icon">📋</div>
+                    <p>No schedule data found</p>
+                    <p class="help-text">Visit your Assembled page to load schedule</p>
+                    <button id="openAssembled" class="action-btn">Open Assembled</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Tab -->
+        <div id="settingsTab" class="tab-content">
+            <div class="settings-section">
+                <h3>Notification Settings</h3>
+                
+                <div class="setting-item">
+                    <label for="alertTime">Alert me before events (minutes):</label>
+                    <input type="number" id="alertTime" min="1" max="60" value="5">
+                </div>
+                
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="enableNotifications" checked>
+                        Enable notifications
+                    </label>
+                </div>
+                
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="autoRefresh" checked>
+                        Auto-refresh schedule when page loads
+                    </label>
+                </div>
+                
+                <button id="saveSettings" class="action-btn primary">Save Settings</button>
+            </div>
+            
+            <div class="settings-section">
+                <h3>Schedule Detection</h3>
+                <div class="info-box">
+                    <p>The extension automatically extracts your schedule from the Assembled page. If times are missing, make sure you're on a page that displays your full schedule.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alarms Tab -->
+        <div id="alarmsTab" class="tab-content">
+            <div class="alarms-header">
+                <h3>Active Alarms</h3>
+                <div id="alarmCount" class="alarm-count">0 active</div>
+            </div>
+            
+            <div id="alarmsList" class="alarms-list">
+                <!-- Active alarms will be listed here -->
+            </div>
+            
+            <div class="alarms-actions">
+                <button id="clearAllAlarms" class="action-btn secondary">Clear All Alarms</button>
+                <button id="refreshAlarms" class="action-btn">Refresh Alarms</button>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div id="lastUpdated" class="last-updated">Last updated: Never</div>
+        </div>
+    </div>
+
     <script src="popup.js"></script>
 </body>
 </html>
