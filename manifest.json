@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "Assembled Schedule Notifier",
+  "version": "1.0",
+  "description": "Provides configurable alerts for upcoming activities on the Assembled Agent Scorecard page.",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting",
+    "alarms",
+    "notifications"
+  ],
+  "host_permissions": [
+    "https://app.assembledhq.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/icon16.png",
+      "48": "images/icon48.png"
+    }
+  }
+}
